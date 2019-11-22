@@ -4,6 +4,10 @@
 by the paper "Building Fast Fuzzers" by Rahul Gopinath and Andreas Zeller.
 https://arxiv.org/pdf/1911.07707.pdf
 
+You can find the F1 fuzzer here:
+
+https://github.com/vrthra/F1
+
 # Usage
 
 Currently this only generates an application that does benchmarking, but with
@@ -64,4 +68,11 @@ This project is on some performance metrics about 20-30% slower than the F1
 fuzzer, but these scenarios are rare. However, in most situations we've been
 about to out-perform F1 by about 30-50%, and in extreme cases (html.json
 depth=8) we've observed over a 4x speedup.
+
+# Differences from the F1 fuzzer
+
+The F1 fuzzer mentions a technique that will resolve to the nearest terminal
+tokens when stack depth is exceeded. We haven't implemented this technique but
+I don't think it's a huge impact on the generated inputs. This is something I
+will look into in the future.
 
