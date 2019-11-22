@@ -48,6 +48,25 @@ This doesn't have any constraints on the random number generation as it uses an
 infinite supply of random numbers. There is no limitation on the output size
 and the buffer will dynamically grow as the input is created.
 
+# Benchmarks
+
+All tests on a single core of a `Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz` with a turbo clock rate of 4.3 GHz
+
+All numbers in `MiB/second`.
+
+| Benchmark          | fzero fuzzer | F1 fuzzer | Speedup |
+|--------------------|--------------|-----------|---------|
+| html.json depth=4  |         5330 |      1295 |   4.11x |
+| html.json depth=8  |         1760 |       348 |   5.05x |
+| html.json depth=16 |          338 |       195 |   1.73x |
+| html.json depth=32 |          218 |       175 |   1.25x |
+| html.json depth=64 |          201 |       175 |   1.14x |
+| json.json depth=4  |           97 |        97 |   1.00x |
+| json.json depth=8  |           79 |        93 |   0.84x |
+| json.json depth=16 |           83 |        89 |   0.93x |
+| json.json depth=32 |           85 |        88 |   0.97x |
+| json.json depth=64 |           85 |        90 |   0.94x |
+
 # Unsafe code
 
 This project uses a small amount of `unsafe` code to provide the same semantics
