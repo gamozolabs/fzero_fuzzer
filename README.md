@@ -48,6 +48,15 @@ This doesn't have any constraints on the random number generation as it uses an
 infinite supply of random numbers. There is no limitation on the output size
 and the buffer will dynamically grow as the input is created.
 
+# Unsafe code
+
+This project uses a small amount of `unsafe` code to provide the same semantics
+of `extend_from_slice` but in a much faster way (over 4x faster). Not quite
+sure why it's much faster, but if you are uncomfortable with `unsafe` code,
+feel free to set `SAFE_ONLY` to `true` at the top of `src/lib.rs`. This will
+restrict this fuzzer to only generate safe code. I don't think this is
+necessary but who knows :)
+
 # Performance
 
 The performance of this tool is separated into multiple categories. One is the
@@ -75,4 +84,11 @@ The F1 fuzzer mentions a technique that will resolve to the nearest terminal
 tokens when stack depth is exceeded. We haven't implemented this technique but
 I don't think it's a huge impact on the generated inputs. This is something I
 will look into in the future.
+
+Due to not using globals this can easily be scaled out to multiple threads as
+all random state and input generation are done in a structure.
+
+There is no use of assembly in this project, and thus it can produce
+highly-performant fuzzers for any architecture or environment that Rust can
+compile against (pretty much identical to LLVM's target list).
 
